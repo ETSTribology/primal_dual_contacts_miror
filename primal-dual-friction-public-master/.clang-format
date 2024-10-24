@@ -1,9 +1,0 @@
-BasedOnStyle: Chromium
-TabWidth: 4
-IndentWidth: 4
-UseTab: "AlignWithSpaces"
-IndentAccessModifiers: false
-# BreakBeforeBraces: Linux
-IndentCaseLabels: false
-Language: Cpp
-#AccessModifierOffset: -4
