@@ -1,12 +1,9 @@
-# Use a base image with necessary tools
 FROM ubuntu:22.04
-
-# Set environment variables to non-interactive (prevents prompts during installation)
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install dependencies
 RUN apt-get update && apt-get install -y \
-    build-essential \
+    curl \
+    sudo \
     cmake \
     libeigen3-dev \
     libglfw3-dev \
@@ -15,25 +12,22 @@ RUN apt-get update && apt-get install -y \
     libx11-dev \
     libomp-dev \
     git \
-    wget \
-    unzip \
-    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Create a working directory
+RUN curl -L https://nixos.org/nix/install | sh
+
+RUN . /root/.nix-profile/etc/profile.d/nix.sh
+
 WORKDIR /app
 
-# Clone the project repository with submodules
-RUN git clone --recursive-submodules https://github.com/ETSTribology/primal_dual_contacts_miror.git .
+RUN git clone --recursive-submodules git@git.ista.ac.at:yichen/primal-dual-friction-public.git
 
-# Create build directory and run CMake to configure the project
-RUN mkdir -p build \
-    && cd build \
-    && cmake ../ \
+RUN nix-shell --run "nix-shell"
+
+RUN mkdir build && cd build \
+    && cmake -DBUILD_NIX_PACKAGE=ON .. \
     && make -j
 
-# Set the working directory to the built binaries
 WORKDIR /app/build/Release/bin
 
-# Default command to run the GUI application (you can adjust based on needs)
 CMD ["./ContactSimulation"]
