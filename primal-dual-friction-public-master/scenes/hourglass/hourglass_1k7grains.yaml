@@ -1,0 +1,22 @@
+scene:
+  meshes: ["hourglass.glb", "grains_1k7.glb"]
+  cubes: ["floor.glb"]
+  static: [0, 1702]
+simulation:
+  timestep: 1e-3
+  adaptive_timestep: false
+  substep_factor: 2.0
+  solver:
+    name: "primal_dual"
+    iterations: 50
+    tolerance: 1e-4
+    non_smooth_force:
+      name: "non_smooth_contact"
+      spring_based_force: false
+      restitution: 0.0
+      static_coeff: 0.6
+  gravity: [0, -9.81, 0]
+baking:
+  time: 15
+logging: "all"
+

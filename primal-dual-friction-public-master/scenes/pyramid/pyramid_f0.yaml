@@ -1,0 +1,23 @@
+scene:
+  meshes: ["box_large.glb", "tray.glb", "grains_9122_settle.glb"]
+  static: [0,1]
+simulation:
+  timestep: 1e-3
+  adaptive_timestep: true
+  substep_factor: 1.0
+  solver:
+    name: "primal_dual"
+    iterations: 50
+    tolerance: 1e-4
+    dormant_iterations: "false"
+    dorm_tolerance: 1e-5
+    dorm_iterations: 20
+    non_smooth_force:
+      name: "only_normal"
+      spring_based_force: true
+      spring_k: 10
+      spring_damp: 0.01
+  gravity: [0, -9.81, 0]
+baking:
+  time: 10
+logging: "all"

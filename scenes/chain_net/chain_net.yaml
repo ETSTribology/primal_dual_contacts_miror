@@ -1,0 +1,17 @@
+scene:
+  meshes: "chain_net_16_ball_centered.glb"
+  static: [0, 16, 256, 241]
+simulation:
+  timestep: 0.01
+  solver:
+    name: "primal_dual"
+    iterations: 50
+    tolerance: 1e-4
+    non_smooth_force:
+      name: "non_smooth_contact"
+      static_coeff: 0.6
+  gravity: [0, -9.81, 0]
+baking:
+  time: 10.0
+logging: "all"
+      

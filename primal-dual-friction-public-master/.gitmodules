@@ -1,0 +1,40 @@
+[submodule "extern/magnum"]
+	path = extern/magnum
+	url = https://github.com/mosra/magnum.git
+[submodule "extern/magnum-integration"]
+	path = extern/magnum-integration
+	url = https://github.com/mosra/magnum-integration.git
+[submodule "extern/corrade"]
+	path = extern/corrade
+	url = https://github.com/mosra/corrade.git
+[submodule "extern/imgui"]
+	path = extern/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "extern/ImGuiFileDialog"]
+	path = extern/ImGuiFileDialog
+	url = https://github.com/aiekick/ImGuiFileDialog.git
+[submodule "extern/magnum-plugins"]
+	path = extern/magnum-plugins
+	url = https://github.com/mosra/magnum-plugins.git
+[submodule "extern/ImGuizmo"]
+	path = extern/ImGuizmo
+	url = https://github.com/CedricGuillemet/ImGuizmo.git
+[submodule "extern/libccd"]
+	path = extern/libccd
+	url = https://github.com/danfis/libccd.git
+[submodule "extern/fcl"]
+	path = extern/fcl
+	url = https://github.com/flexible-collision-library/fcl.git
+[submodule "extern/yaml-cpp"]
+	path = extern/yaml-cpp
+	url = https://github.com/jbeder/yaml-cpp.git
+[submodule "extern/amgcl"]
+	path = extern/amgcl
+	url = https://github.com/ddemidov/amgcl
+[submodule "extern/cnpy"]
+	path = extern/cnpy
+	url = https://git.ista.ac.at/yichen/cnpy.git
+	branch = libzip-fixed
+[submodule "extern/libigl"]
+	path = extern/libigl
+	url = https://github.com/libigl/libigl.git

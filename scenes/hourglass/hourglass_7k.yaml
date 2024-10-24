@@ -1,0 +1,21 @@
+scene:
+  meshes: ["hourglass.glb"]
+  spheres: ["grains_7k.glb"]
+  cubes: ["floor.glb"]
+  static: [0, 1]
+simulation:
+  timestep: 1e-3
+  adaptive_timestep: false
+  substep_factor: 1.0
+  solver:
+    name: "primal_dual"
+    iterations: 50
+    tolerance: 5e-5
+    non_smooth_force:
+      name: "non_smooth_contact"
+      restitution: 0.0
+      static_coeff: 0.5
+  gravity: [0, -9.81, 0]
+baking:
+  time: 17
+logging: "all"

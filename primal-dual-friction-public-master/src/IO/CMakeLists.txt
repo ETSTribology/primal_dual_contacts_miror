@@ -1,0 +1,33 @@
+add_library(IO STATIC
+    FileLoader.h
+    FileLoader.cpp
+    FileSaver.h
+    FileSaver.cpp
+)
+add_dependencies(IO
+    cnpy
+    Magnum::AnyImageImporter
+    Magnum::AnySceneImporter
+    Magnum::AnySceneConverter
+    Magnum::ObjImporter
+    MagnumPlugins::StbImageImporter
+    MagnumPlugins::TinyGltfImporter
+    MagnumPlugins::GltfSceneConverter
+)
+target_link_libraries(IO
+    cnpy
+    Dynamics
+    Drawables
+    yaml-cpp::yaml-cpp
+    OpenMP::OpenMP_CXX
+    Corrade::Main
+    Magnum::Magnum
+    Magnum::Trade
+    Magnum::MeshTools
+    Magnum::Primitives
+    Magnum::SceneGraph
+    Magnum::GL
+    MagnumIntegration::Eigen
+    ${FCL_LIBRARY}
+    ${CCD_LIBRARY}
+)

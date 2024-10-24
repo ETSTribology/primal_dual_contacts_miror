@@ -1,0 +1,19 @@
+scene:
+  cubes: ["ground.glb", "cards_5_tilt.glb"]
+  static: [0]
+simulation:
+  timestep: 1e-2
+  adaptive_timestep: true
+  substep_factor: 1.5
+  solver:
+    name: "primal_dual"
+    iterations: 50
+    tolerance: 1e-4
+    non_smooth_force:
+      name: "non_smooth_contact"
+      restitution: 0.0
+      static_coeff: 0.2
+  gravity: [0, -9.81, 0]
+baking:
+  time: 3
+logging: "all"
