@@ -31,4 +31,4 @@ RUN mkdir build && cd build \
 WORKDIR /app/primal-dual/build/Release/bin
 
 # Define entrypoint for the main application
-CMD ["./ContactSimulation"]
+CMD ["./CLIContactSimulation"]
