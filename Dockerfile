@@ -1,7 +1,7 @@
 FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install required dependencies
+# Install required dependencies in a single layer
 RUN apt-get update && apt-get install -y \
     curl \
     sudo \
@@ -18,11 +18,14 @@ RUN apt-get update && apt-get install -y \
 # Set up work directory
 WORKDIR /app
 
-# Clone the repository
-RUN git clone --recursive-submodules https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
+# Clone the repository without submodules
+RUN git clone https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
+
+# Initialize and update submodules
+WORKDIR /app/primal-dual
+RUN git submodule init && git submodule update --recursive
 
 # Build the project
-WORKDIR /app/primal-dual
 RUN mkdir build && cd build \
     && cmake -DBUILD_NIX_PACKAGE=OFF .. \
     && make -j
