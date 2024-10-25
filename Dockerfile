@@ -1,6 +1,7 @@
 FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Install required dependencies
 RUN apt-get update && apt-get install -y \
     curl \
     sudo \
@@ -14,20 +15,20 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -L https://nixos.org/nix/install | sh
-
-RUN . /root/.nix-profile/etc/profile.d/nix.sh
-
+# Set up work directory
 WORKDIR /app
 
-RUN git clone --recursive-submodules git@git.ista.ac.at:yichen/primal-dual-friction-public.git
+# Clone the repository
+RUN git clone --recursive-submodules https://git.ista.ac.at/yichen/primal-dual-friction-public.git primal-dual
 
-RUN nix-shell --run "nix-shell"
-
+# Build the project
+WORKDIR /app/primal-dual
 RUN mkdir build && cd build \
-    && cmake -DBUILD_NIX_PACKAGE=ON .. \
+    && cmake -DBUILD_NIX_PACKAGE=OFF .. \
     && make -j
 
-WORKDIR /app/build/Release/bin
+# Set binary directory as the working directory
+WORKDIR /app/primal-dual/build/Release/bin
 
+# Define entrypoint for the main application
 CMD ["./ContactSimulation"]
