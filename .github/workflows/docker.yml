@@ -19,18 +19,13 @@ jobs:
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Cache Docker layers
-        uses: actions/cache@v3
-        with:
-          path: /tmp/.buildx-cache
-          key: ${{ runner.os }}-docker-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-docker-
-
       - name: Build Docker Image
         run: |
-          docker buildx create --use
-          docker buildx build --cache-to type=local,dest=/tmp/.buildx-cache --cache-from type=local,src=/tmp/.buildx-cache -t ${{ secrets.DOCKER_USERNAME }}/primal-dual-simulation:latest --push .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/primal-dual-simulation:latest .
+      
+      - name: Push Docker Image
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/primal-dual-simulation:latest
 
       - name: Run Docker Container
         run: |
