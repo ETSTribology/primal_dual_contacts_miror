@@ -19,7 +19,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 # Clone the repository
-RUN git clone --recursive-submodules https://git.ista.ac.at/yichen/primal-dual-friction-public.git primal-dual
+RUN git clone --recursive-submodules https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
 
 # Build the project
 WORKDIR /app/primal-dual
