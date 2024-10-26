@@ -6,13 +6,11 @@ RUN apt-get update && apt-get install -y \
     curl \
     sudo \
     cmake \
-    build-essential \        # Includes g++, make, etc.
     libeigen3-dev \
     libglfw3-dev \
     libzip-dev \
     libboost-dev \
     libx11-dev \
-    libomp-dev \
     git \
     && rm -rf /var/lib/apt/lists/*
 
