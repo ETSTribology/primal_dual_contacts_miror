@@ -52,7 +52,7 @@ git submodule update --init --recursive
 ```
 or, during cloning:
 ```
-git clone --recursive-submodules git@git.ista.ac.at:yichen/primal-dual-friction-public.git
+git clone --recursive git clone --recursive https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
 ```
 
 In particuar, we use a [custom fork](https://git.ista.ac.at/yichen/cnpy/-/tree/libzip-fixed) of CNPY which fixes its corrupting of NPZ files larger than 4GB (See [this issue](https://github.com/rogersce/cnpy/issues/39)).
@@ -67,7 +67,7 @@ sudo apt install cmake libeigen3-dev libglfw3-dev libzip-dev libboost-dev libx11
 ```
 The correct OpenMP implementation is also required for the project to compile with Clang. On Ubuntu 22.04 it is named `libomp-dev`.
 
-2. Configure and build the project with CMake and make.  
+2. Configure and build the project with CMake and make.
 ```
 mkdir build
 cd build
@@ -101,7 +101,7 @@ make -j
 ```
 
 > :information_source: NOTE
-> 
+>
 > Both Nix Shells and Nix builds still require initializing submodules!
 
 ### Nix build
