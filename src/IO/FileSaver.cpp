@@ -14,6 +14,8 @@
 #include <Magnum/Math/Algorithms/GramSchmidt.h>
 #include <Magnum/Math/Algorithms/Svd.h>
 
+#include <zip.h>
+
 
 namespace FrictionFrenzy {
 namespace IO {
