@@ -21,19 +21,8 @@ jobs:
       - name: Set up dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y \
-            cmake \
-            libeigen3-dev \
-            libglfw3-dev \
-            libzip-dev \
-            libboost-dev \
-            libx11-dev \
-            libomp-dev \
-            libsdl2-dev \
-            libassimp-dev \
-            libmagnum-dev \
-            libcorrade-dev
-
+          sudo apt-get install -y cmake libeigen3-dev libglfw3-dev libzip-dev libboost-dev libx11-dev
+          
       - name: Create build directory
         run: mkdir -p build
 
