@@ -1,7 +1,7 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.04 AS build
+
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install required dependencies in a single layer
 RUN apt-get update && apt-get install -y \
     curl \
     sudo \
@@ -15,23 +15,28 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Set up work directory
 WORKDIR /app
 
-# Clone the repository without submodules
-RUN git clone https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
+RUN git clone --recursive https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
 
-# Initialize and update submodules
 WORKDIR /app/primal-dual
-RUN git submodule init && git submodule update --recursive
-
-# Build the project
-RUN mkdir build && cd build \
+RUN mkdir -p build && cd build \
     && cmake -DBUILD_NIX_PACKAGE=OFF .. \
     && make -j
 
-# Set binary directory as the working directory
-WORKDIR /app/primal-dual/build/Release/bin
+FROM ubuntu:22.04 AS runtime
 
-# Define entrypoint for the main application
+RUN apt-get update && apt-get install -y \
+    libeigen3-dev \
+    libglfw3-dev \
+    libzip-dev \
+    libboost-dev \
+    libx11-dev \
+    libomp-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /app/primal-dual/build/Release/bin /app/bin
+
+WORKDIR /app/bin
+
 CMD ["./CLIContactSimulation"]
