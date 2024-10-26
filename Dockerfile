@@ -12,6 +12,10 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libboost-dev \
     libx11-dev \
+    libgl1-mesa-glx \
+    libglu1-mesa \
+    libxrender1 \
+    libxi6 \
     build-essential \
     git \
     && rm -rf /var/lib/apt/lists/*
@@ -31,4 +35,9 @@ RUN make -j4
 
 WORKDIR /app/primal-dual/build/Release/bin
 
+ENV DISPLAY=:0
+ENV LIBGL_ALWAYS_INDIRECT=1
+VOLUME ["/tmp/.X11-unix"]
+
 CMD ["./CLIContactSimulation"]
+# CMD ["./ContactSimulation"] # UI
