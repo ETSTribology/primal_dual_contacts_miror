@@ -1,3 +1,4 @@
+# Build stage
 FROM ubuntu:22.04 AS build
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,21 +12,15 @@ RUN apt-get update && apt-get install -y \
     libzip-dev \
     libboost-dev \
     libx11-dev \
+    build-essential \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-RUN g++ --version
-
 WORKDIR /app
-
 RUN git clone --recursive https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
 
 WORKDIR /app/primal-dual
-
-RUN mkdir -p build
-RUN cd build
-RUN cmake ..
-RUN make -j 4
+RUN mkdir -p build && cd build && cmake .. && make -j4
 
 FROM ubuntu:22.04 AS runtime
 
@@ -40,8 +35,8 @@ RUN apt-get update && apt-get install -y \
     libomp-dev \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /app/primal-dual/build/Release/bin /app/bin
+COPY --from=build /app/primal-dual/build /app/build
 
-WORKDIR /app/bin
+WORKDIR /app/build/Release/bin
 
 CMD ["./CLIContactSimulation"]
