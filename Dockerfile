@@ -20,6 +20,7 @@ WORKDIR /app
 RUN git clone --recursive https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
 
 WORKDIR /app/primal-dual
+RUN git submodule update --init --recursive
 RUN mkdir -p build && cd build && cmake .. && make -j4
 
 FROM ubuntu:22.04 AS runtime
