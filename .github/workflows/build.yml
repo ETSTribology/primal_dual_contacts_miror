@@ -1,0 +1,53 @@
+name: Build Project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake \
+            libeigen3-dev \
+            libglfw3-dev \
+            libzip-dev \
+            libboost-dev \
+            libx11-dev \
+            libomp-dev
+
+      - name: Set up submodules
+        run: |
+          git submodule init
+          git submodule update --recursive
+
+      - name: Create build directory
+        run: mkdir -p build
+
+      - name: Configure CMake
+        working-directory: build
+        run: cmake ..
+
+      - name: Build with Make
+        working-directory: build
+        run: make -j
+
+      - name: Verify build
+        run: |
+          if [ ! -f build/Release/bin/CLIContactSimulation ]; then
+            echo "Build failed: CLIContactSimulation not found"
+            exit 1
+          fi
+        shell: bash
