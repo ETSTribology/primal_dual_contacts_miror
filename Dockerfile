@@ -21,11 +21,14 @@ RUN git clone --recursive https://github.com/ETSTribology/primal_dual_contacts_m
 
 WORKDIR /app/primal-dual
 RUN git submodule update --init --recursive
+
 RUN mkdir -p build
-RUN cd build
-RUN cmake ..
+
+WORKDIR /app/primal-dual/build
+
+RUN cmake .. -DCMAKE_BUILD_TYPE=Release
 RUN make -j4
 
-WORKDIR /app/build/Release/bin
+WORKDIR /app/primal-dual/build/Release/bin
 
 CMD ["./CLIContactSimulation"]
