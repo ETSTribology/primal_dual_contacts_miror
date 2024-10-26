@@ -52,7 +52,7 @@ git submodule update --init --recursive
 ```
 or, during cloning:
 ```
-git clone --recursive git clone --recursive https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
+git clone --recursive https://github.com/ETSTribology/primal_dual_contacts_miror primal-dual
 ```
 
 In particuar, we use a [custom fork](https://git.ista.ac.at/yichen/cnpy/-/tree/libzip-fixed) of CNPY which fixes its corrupting of NPZ files larger than 4GB (See [this issue](https://github.com/rogersce/cnpy/issues/39)).
