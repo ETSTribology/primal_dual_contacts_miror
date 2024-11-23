@@ -158,3 +158,7 @@ The script will import the animation and adjust to the current frame rate. E.g. 
 > 
 > Make sure that time stretching is not set under `Output > Format`, or the scene will not input properly!
 
+![ball_primal_dual](https://github.com/user-attachments/assets/7ccc52d8-a65f-4780-8ddb-262938c03f0d)
+![bolt_primal_dual](https://github.com/user-attachments/assets/97720b1a-125c-46fd-aac8-7920041a1144)
+
+
